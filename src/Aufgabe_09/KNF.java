@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class KNF {
+public class KNF  {
 	public Set<Klausel> klauseln;
 
 	public KNF(Set<Klausel> klauseln) {
