@@ -5,7 +5,11 @@
 	<projects>
 	</projects>
 	<buildSpec>
+<<<<<<< HEAD
 	<buildCommand>
+=======
+		<buildCommand>
+>>>>>>> 5f569e4f1aa76feb53e2d513b4b7c4845e9ac850
 			<name>org.eclipse.jdt.core.javabuilder</name>
 			<arguments>
 			</arguments>
