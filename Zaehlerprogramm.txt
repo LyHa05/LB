@@ -1,0 +1,8 @@
+c = 5
+c = 3
+
+b1: c1++
+b2: c2--
+
+if c2 == 0 then b0 else b1
+b0
