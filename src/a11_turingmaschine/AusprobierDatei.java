@@ -14,7 +14,7 @@ public class AusprobierDatei {
 	
 		
 	TM unsereTM1 = new TM("LB_Aufgabe12");
-	TM_Debugger.debugRechnung(unsereTM1, "aaaabbbbbaa");
+	TM_Debugger.debugRechnung(unsereTM1, "aaaaaaaaaaabbbbbbbb");
 	
 //	System.out.println(" ");
 //	System.out.println(" ");
