@@ -3,33 +3,39 @@ package a09_resolution_lydia;
 public class Literal {
 	public char bezeichner;
 	public boolean wahrheitswert;
-	
+
+	/** Konstruktor zum Erstellen von Literalen */
 	public Literal(char bezeichner, boolean wahrheitswert) {
 		this.bezeichner = bezeichner;
 		this.wahrheitswert = wahrheitswert;
 	}
-	
+
+	/** Konstruktor ohne Parameter */
 	public Literal() {
-		
+
 	}
-	
+
+	/** Kopie-Konstruktor */
 	public Literal(Literal lit) {
 		this(lit.getBezeichner(), lit.getWahrheitswert());
 	}
 
+	/** Getter Methode fuer Bezeichner */
 	public char getBezeichner() {
 		return bezeichner;
 	}
 
+	/** Setter Methode fuer Wahrheitswert */
 	public void changeWahrheitswert() {
 		wahrheitswert = !wahrheitswert;
 	}
-	
+
+	/** Getter Methode fuer Wahrheitswert */
 	public boolean getWahrheitswert() {
 		return wahrheitswert;
 	}
 
-
+	/** ueberschriebene Methode fuer hashCode */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -39,6 +45,7 @@ public class Literal {
 		return result;
 	}
 
+	/** ueberschriebene Methode fuer equals */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -59,6 +66,8 @@ public class Literal {
 		}
 		return true;
 	}
+
+	/** ueberschriebene toString Methode */
 
 	@Override
 	public String toString() {

@@ -45,7 +45,7 @@ public class EinheitsResolution {
 		}
 	}
 	
-
+	/**Methode zum resolvieren*/
 	public static HashSet<Klausel> einheitsResolvieren(HashSet<Klausel> uebergebenerKNF) {
 
 		if(!istHornFormel(uebergebenerKNF)) {
@@ -127,6 +127,7 @@ public class EinheitsResolution {
 
 	}
 
+	/**Methode erstellt neue Klausel aus resolvierten Klauseln*/
 	private static Klausel resolvierteLiteraleZusammen(HashSet<Klausel> nochZuResolvieren, Klausel k1, Klausel k2, Literal l1, Literal l2) {
 
 		Klausel neuK = new Klausel();
@@ -147,6 +148,7 @@ public class EinheitsResolution {
 		return neuK;
 	}
 
+	/**Methode, um tiefe Kopie von KNF zu erstellen*/
 	private static HashSet<Klausel> tiefeKopieErstellen(HashSet<Klausel> klauselliste) {
 		HashSet<Klausel> kopierteKlauselListe = new HashSet<Klausel>();
 
@@ -164,6 +166,7 @@ public class EinheitsResolution {
 		return kopierteKlauselListe;
 	}
 
+	/**Methode fuer formatierte Ergebnisausgabe*/
 	public static String ausgabe(HashSet<Klausel> ergebnisKlausel) {
 		StringBuilder builder = new StringBuilder();
 		Object[] knf = ergebnisKlausel.toArray();
@@ -182,6 +185,19 @@ public class EinheitsResolution {
 		return builder.toString();
 	}
 
+	/** Methode fuer formatierte Ergebnisausgabe */
+	public static String ergebnis(HashSet<Klausel> ergebnisKlausel) {
+		String ergebnis = "";
+		
+		if (ergebnisKlausel.isEmpty()) {
+			ergebnis = "nicht erfuellbar"; 
+		} else {
+			ergebnis = "erfuellbar";
+		}
+
+		return ergebnis;
+	}
+	
 	/** prueft, ob 2 Literale resolvierbar sind */
 	private static boolean istResolvierbar(Klausel klauselA, Klausel klauselB, Literal literalA, Literal literalB) {
 		return ((literalA.getBezeichner() == literalB.getBezeichner())

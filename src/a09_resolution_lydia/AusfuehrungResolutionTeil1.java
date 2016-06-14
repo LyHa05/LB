@@ -100,8 +100,8 @@ public class AusfuehrungResolutionTeil1 {
 		EinfacheResolution.resolvierenNormal(knf);
 		zeit2 = System.currentTimeMillis();
 		System.out.println("benoetigte Zeit: " + (zeit2-zeit1));
-		System.out.println("Eingabe: " + knf);
-		System.out.println(EinfacheResolution.ausgabe(EinfacheResolution.resolvierenNormal(knf)));
+		System.out.println("Eingabe: " + EinfacheResolution.ausgabe(knf));
+		System.out.println("Ergebnis: "  + EinfacheResolution.ergebnis(EinfacheResolution.resolvierenNormal(knf)));
 		System.out.println(EinfacheResolution.zaehler1);
 		System.out.println(EinfacheResolution.zaehler2);
 		
@@ -110,8 +110,8 @@ public class AusfuehrungResolutionTeil1 {
 		PResolution.pResolvieren(knf);
 		zeit2 = System.currentTimeMillis();
 		System.out.println("benoetigte Zeit: " + (zeit2-zeit1));
-		System.out.println("Eingabe: " + knf);
-		System.out.println(PResolution.ausgabe(PResolution.pResolvieren(knf)));
+		System.out.println("Eingabe: " + PResolution.ausgabe(knf));
+		System.out.println("Ergebnis: "  + PResolution.ergebnis(PResolution.pResolvieren(knf)));
 		System.out.println(PResolution.zaehler1);
 		System.out.println(PResolution.zaehler2);
 		
@@ -120,8 +120,8 @@ public class AusfuehrungResolutionTeil1 {
 		NResolution.nResolvieren(knf);
 		zeit2 = System.currentTimeMillis();
 		System.out.println("benoetigte Zeit: " + (zeit2-zeit1));
-		System.out.println("Eingabe: " + knf);
-		System.out.println(NResolution.ausgabe(NResolution.nResolvieren(knf)));
+		System.out.println("Eingabe: " + NResolution.ausgabe(knf));
+		System.out.println("Ergebnis: "  + NResolution.ergebnis(NResolution.nResolvieren(knf)));
 		System.out.println(NResolution.zaehler1);
 		System.out.println(NResolution.zaehler2);
 		
@@ -130,21 +130,10 @@ public class AusfuehrungResolutionTeil1 {
 		SortResolution.resolvierenSortiert(knfSort);
 		zeit2 = System.currentTimeMillis();
 		System.out.println("benoetigte Zeit: " + (zeit2-zeit1));
-		System.out.println("Eingabe: " + knfSort);
-		System.out.println(SortResolution.ausgabe(SortResolution.resolvierenSortiert(knfSort)));
+		System.out.println("Eingabe: " + SortResolution.ausgabe(knfSort));
+		System.out.println("Ergebnis: "  + SortResolution.ergebnis(SortResolution.resolvierenSortiert(knfSort)));
 		System.out.println(SortResolution.zaehler1);
 		System.out.println(SortResolution.zaehler2);
-		
-		System.out.println("\n" + "Einheitsresolution:");
-		zeit1 = System.currentTimeMillis();
-		EinheitsResolution.einheitsResolvieren(knf);
-		zeit2 = System.currentTimeMillis();
-		System.out.println("benoetigte Zeit: " + (zeit2-zeit1));
-		System.out.println("Eingabe: " + knf);
-		System.out.println(EinheitsResolution.ausgabe(EinheitsResolution.einheitsResolvieren(knf)));
-		System.out.println(EinheitsResolution.zaehler1);
-		System.out.println(EinheitsResolution.zaehler2);
-		
 	}
 	
 }
