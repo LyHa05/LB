@@ -2,10 +2,11 @@ package a09_resolution_lydia;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.TreeSet;
 
 public class EinheitsResolution {
 
-	public static HashSet<Klausel> knf;
+	public static TreeSet<Klausel> knf;
 	public static boolean resolviert = false;
 	public static int zaehler1 = 0;
 	public static int zaehler2 = 0;
@@ -27,7 +28,7 @@ public class EinheitsResolution {
 	}
 	
 	/** Methode prueft, ob Hornformel vorliegt.*/
-	public static boolean istHornFormel(HashSet<Klausel> zupruefendeKlauseln) {
+	public static boolean istHornFormel(TreeSet<Klausel> zupruefendeKlauseln) {
 		for(Klausel k : zupruefendeKlauseln) {
 			if(!istHornKlausel(k.getLiterale())) {
 				return false;
@@ -46,14 +47,14 @@ public class EinheitsResolution {
 	}
 	
 	/**Methode zum resolvieren*/
-	public static HashSet<Klausel> einheitsResolvieren(HashSet<Klausel> uebergebenerKNF) {
+	public static TreeSet<Klausel> einheitsResolvieren(TreeSet<Klausel> uebergebenerKNF) {
 
 		if(!istHornFormel(uebergebenerKNF)) {
 			throw new IllegalArgumentException("Die uebergebene KNF ist keine Hornformel.");
 		}
 		
-		HashSet<Klausel> verfuegbareKlauseln = new HashSet<Klausel>(tiefeKopieErstellen(uebergebenerKNF));
-		HashSet<Klausel> zuResolvierendeKlauseln = new HashSet<Klausel>(tiefeKopieErstellen(uebergebenerKNF));
+		TreeSet<Klausel> verfuegbareKlauseln = new TreeSet<Klausel>(tiefeKopieErstellen(uebergebenerKNF));
+		TreeSet<Klausel> zuResolvierendeKlauseln = new TreeSet<Klausel>(tiefeKopieErstellen(uebergebenerKNF));
 		int anzahlVerfKlau;
 
 		do {
@@ -128,7 +129,7 @@ public class EinheitsResolution {
 	}
 
 	/**Methode erstellt neue Klausel aus resolvierten Klauseln*/
-	private static Klausel resolvierteLiteraleZusammen(HashSet<Klausel> nochZuResolvieren, Klausel k1, Klausel k2, Literal l1, Literal l2) {
+	private static Klausel resolvierteLiteraleZusammen(TreeSet<Klausel> nochZuResolvieren, Klausel k1, Klausel k2, Literal l1, Literal l2) {
 
 		Klausel neuK = new Klausel();
 
@@ -149,8 +150,8 @@ public class EinheitsResolution {
 	}
 
 	/**Methode, um tiefe Kopie von KNF zu erstellen*/
-	private static HashSet<Klausel> tiefeKopieErstellen(HashSet<Klausel> klauselliste) {
-		HashSet<Klausel> kopierteKlauselListe = new HashSet<Klausel>();
+	private static TreeSet<Klausel> tiefeKopieErstellen(TreeSet<Klausel> klauselliste) {
+		TreeSet<Klausel> kopierteKlauselListe = new TreeSet<Klausel>();
 
 		for (Klausel tempKlausel : klauselliste) {
 			Klausel neueK = new Klausel(tempKlausel.getLiterale());
@@ -167,7 +168,7 @@ public class EinheitsResolution {
 	}
 
 	/**Methode fuer formatierte Ergebnisausgabe*/
-	public static String ausgabe(HashSet<Klausel> ergebnisKlausel) {
+	public static String ausgabe(TreeSet<Klausel> ergebnisKlausel) {
 		StringBuilder builder = new StringBuilder();
 		Object[] knf = ergebnisKlausel.toArray();
 		builder.append('{');
@@ -186,7 +187,7 @@ public class EinheitsResolution {
 	}
 
 	/** Methode fuer formatierte Ergebnisausgabe */
-	public static String ergebnis(HashSet<Klausel> ergebnisKlausel) {
+	public static String ergebnis(TreeSet<Klausel> ergebnisKlausel) {
 		String ergebnis = "";
 		
 		if (ergebnisKlausel.isEmpty()) {
@@ -251,18 +252,14 @@ public class EinheitsResolution {
 		Klausel klausel3 = new Klausel(litset3);
 		Klausel klausel4 = new Klausel(litset4);
 		
-		knf = new HashSet<Klausel>();
+		knf = new TreeSet<Klausel>();
 
 		knf.add(klausel1);
 		knf.add(klausel2);
 		knf.add(klausel3);
 		knf.add(klausel4);
 
-//		TreeSet<Klausel> knfSort = new TreeSet<Klausel>(knf);
-		
-
 		System.out.println(knf);
-//		System.out.println(knfSort);
 
 		System.out.println(ausgabe(einheitsResolvieren(knf)));
 		System.out.println(knf);

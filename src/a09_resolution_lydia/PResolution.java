@@ -2,10 +2,11 @@ package a09_resolution_lydia;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.TreeSet;
 
 public class PResolution {
 
-	public static HashSet<Klausel> knf;
+	public static TreeSet<Klausel> knf;
 	public static boolean resolviert = false;
 	public static int zaehler1 = 0;
 	public static int zaehler2 = 0;
@@ -26,7 +27,7 @@ public class PResolution {
 	}
 
 	/** Methode prueft, ob HashSet aus Klauseln positive Klausel enthaelt */
-	public static boolean enthaeltPositiveKlausel(HashSet<Klausel> zuPruefendeKlauseln) {
+	public static boolean enthaeltPositiveKlausel(TreeSet<Klausel> zuPruefendeKlauseln) {
 		for (Klausel k : zuPruefendeKlauseln) {
 			if (istPositiveKlausel(k.getLiterale())) {
 				return true;
@@ -36,14 +37,14 @@ public class PResolution {
 	}
 
 	/** Methode zum resolvieren */
-	public static HashSet<Klausel> pResolvieren(HashSet<Klausel> uebergebenerKNF) {
+	public static TreeSet<Klausel> pResolvieren(TreeSet<Klausel> uebergebenerKNF) {
 
 		if (!enthaeltPositiveKlausel(uebergebenerKNF)) {
 			throw new IllegalArgumentException("Die uebergebene KNF enthaelt keine positiven Klauseln.");
 		}
 
-		HashSet<Klausel> verfuegbareKlauseln = new HashSet<Klausel>(tiefeKopieErstellen(uebergebenerKNF));
-		HashSet<Klausel> zuResolvierendeKlauseln = new HashSet<Klausel>(tiefeKopieErstellen(uebergebenerKNF));
+		TreeSet<Klausel> verfuegbareKlauseln = new TreeSet<Klausel>(tiefeKopieErstellen(uebergebenerKNF));
+		TreeSet<Klausel> zuResolvierendeKlauseln = new TreeSet<Klausel>(tiefeKopieErstellen(uebergebenerKNF));
 		int anzahlVerfKlau;
 
 		do {
@@ -74,8 +75,7 @@ public class PResolution {
 								// System.out.println("k1: " + k1);
 								// System.out.println("k2: " + k2);
 
-								Klausel neueKlausel = new Klausel(
-										resolvierteLiteraleZusammen(zuResolvierendeKlauseln, k1, k2, l1, l2));
+								Klausel neueKlausel = new Klausel(resolvierteLiteraleZusammen(zuResolvierendeKlauseln, k1, k2, l1, l2));
 
 								if (!neueKlausel.getLiterale().isEmpty()) {
 									verfuegbareKlauseln.add(neueKlausel);
@@ -118,7 +118,7 @@ public class PResolution {
 	}
 
 	/** Methode erstellt neue Klausel aus resolvierten Klauseln */
-	private static Klausel resolvierteLiteraleZusammen(HashSet<Klausel> nochZuResolvieren, Klausel k1, Klausel k2,
+	private static Klausel resolvierteLiteraleZusammen(TreeSet<Klausel> nochZuResolvieren, Klausel k1, Klausel k2,
 			Literal l1, Literal l2) {
 
 		Klausel neuK = new Klausel();
@@ -139,8 +139,8 @@ public class PResolution {
 	}
 
 	/** Methode, um tiefe Kopie von KNF zu erstellen */
-	private static HashSet<Klausel> tiefeKopieErstellen(HashSet<Klausel> klauselliste) {
-		HashSet<Klausel> kopierteKlauselListe = new HashSet<Klausel>();
+	private static TreeSet<Klausel> tiefeKopieErstellen(TreeSet<Klausel> klauselliste) {
+		TreeSet<Klausel> kopierteKlauselListe = new TreeSet<Klausel>();
 
 		for (Klausel tempKlausel : klauselliste) {
 			Klausel neueK = new Klausel(tempKlausel.getLiterale());
@@ -157,14 +157,14 @@ public class PResolution {
 	}
 
 	/** Methode fuer formatierte Ergebnisausgabe */
-	public static String ausgabe(HashSet<Klausel> ergebnisKlausel) {
+	public static String ausgabe(TreeSet<Klausel> ergebnisKlausel) {
 		StringBuilder builder = new StringBuilder();
 		Object[] knf = ergebnisKlausel.toArray();
 		builder.append('{');
 
 		if (knf.length != 0) {
 			for (int i = 0; i < knf.length - 1; i++) {
-				builder.append(knf[i].toString());
+				builder.append(knf[i].toString()).append(", ");
 			}
 			builder.append(knf[knf.length - 1]);
 		} else {
@@ -176,7 +176,7 @@ public class PResolution {
 	}
 
 	/** Methode fuer formatierte Ergebnisausgabe */
-	public static String ergebnis(HashSet<Klausel> ergebnisKlausel) {
+	public static String ergebnis(TreeSet<Klausel> ergebnisKlausel) {
 		String ergebnis = "";
 		
 		if (ergebnisKlausel.isEmpty()) {
@@ -226,7 +226,7 @@ public class PResolution {
 		Klausel klausel3 = new Klausel(litset3);
 		// Klausel klausel4 = new Klausel(litset4);
 
-		knf = new HashSet<Klausel>();
+		knf = new TreeSet<Klausel>();
 
 		knf.add(klausel1);
 		knf.add(klausel2);

@@ -149,7 +149,7 @@ public class SortResolution {
 
 		if (knf.length != 0) {
 			for (int i = 0; i < knf.length - 1; i++) {
-				builder.append(knf[i].toString());
+				builder.append(knf[i].toString()).append(", ");
 			}
 			builder.append(knf[knf.length - 1]);
 		} else {

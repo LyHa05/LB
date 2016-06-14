@@ -80,11 +80,11 @@ public class AusfuehrungResolutionTeil2 {
 		
 		System.out.println("\n" + "Einheitsresolution:");
 		zeit1 = System.currentTimeMillis();
-		EinheitsResolution.einheitsResolvieren(knf);
+		EinheitsResolution.einheitsResolvieren(knfSort);
 		zeit2 = System.currentTimeMillis();
 		System.out.println("benoetigte Zeit: " + (zeit2-zeit1));
-		System.out.println("Eingabe: " + EinheitsResolution.ausgabe(knf));
-		System.out.println("Ergebnis: "  + EinheitsResolution.ergebnis(EinheitsResolution.einheitsResolvieren(knf)));
+		System.out.println("Eingabe: " + EinheitsResolution.ausgabe(knfSort));
+		System.out.println("Ergebnis: "  + EinheitsResolution.ergebnis(EinheitsResolution.einheitsResolvieren(knfSort)));
 		System.out.println(EinheitsResolution.zaehler1);
 		System.out.println(EinheitsResolution.zaehler2);
 		

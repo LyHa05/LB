@@ -107,21 +107,21 @@ public class AusfuehrungResolutionTeil1 {
 		
 		System.out.println("\n" + "P-Resolution:");
 		zeit1 = System.currentTimeMillis();
-		PResolution.pResolvieren(knf);
+		PResolution.pResolvieren(knfSort);
 		zeit2 = System.currentTimeMillis();
 		System.out.println("benoetigte Zeit: " + (zeit2-zeit1));
-		System.out.println("Eingabe: " + PResolution.ausgabe(knf));
-		System.out.println("Ergebnis: "  + PResolution.ergebnis(PResolution.pResolvieren(knf)));
+		System.out.println("Eingabe: " + PResolution.ausgabe(knfSort));
+		System.out.println("Ergebnis: "  + PResolution.ergebnis(PResolution.pResolvieren(knfSort)));
 		System.out.println(PResolution.zaehler1);
 		System.out.println(PResolution.zaehler2);
 		
 		System.out.println("\n" + "N-Resolution:");
 		zeit1 = System.currentTimeMillis();
-		NResolution.nResolvieren(knf);
+		NResolution.nResolvieren(knfSort);
 		zeit2 = System.currentTimeMillis();
 		System.out.println("benoetigte Zeit: " + (zeit2-zeit1));
-		System.out.println("Eingabe: " + NResolution.ausgabe(knf));
-		System.out.println("Ergebnis: "  + NResolution.ergebnis(NResolution.nResolvieren(knf)));
+		System.out.println("Eingabe: " + NResolution.ausgabe(knfSort));
+		System.out.println("Ergebnis: "  + NResolution.ergebnis(NResolution.nResolvieren(knfSort)));
 		System.out.println(NResolution.zaehler1);
 		System.out.println(NResolution.zaehler2);
 		
