@@ -8,6 +8,7 @@ public class PResolution {
 
 	public static TreeSet<Klausel> knf;
 	public static boolean resolviert = false;
+	public static boolean bereitsEnthalten = false;
 	public static int zaehler1 = 0;
 	public static int zaehler2 = 0;
 
@@ -97,21 +98,19 @@ public class PResolution {
 								// System.out.println("zuResolvierendeKlauseln:
 								// " + zuResolvierendeKlauseln);
 
+								if (verfuegbareKlauseln.contains(neueKlausel)) {
+									bereitsEnthalten = true;
+								}
+								
 								++zaehler2;
-
-								// break;
 							}
-							// break;
 						}
-						// break;
 					}
-					// break;
 				}
-				// break;
 
 			}
 		} while (resolviert == true && !(zuResolvierendeKlauseln.isEmpty())
-				&& (verfuegbareKlauseln.size() != anzahlVerfKlau));
+				&& ((verfuegbareKlauseln.size() != anzahlVerfKlau) || bereitsEnthalten == true));
 
 		return zuResolvierendeKlauseln;
 
@@ -197,46 +196,39 @@ public class PResolution {
 
 	public static void main(String[] args) {
 
-		HashSet<Literal> litset1 = new HashSet<Literal>();
+		/**{{A,B},{!B,C},{!C,D}} = {A,D}*/
+		
+    	HashSet<Literal> litset1 = new HashSet<Literal>();
 		Literal l1 = new Literal('A', true);
 		Literal l2 = new Literal('B', true);
 		litset1.add(l1);
 		litset1.add(l2);
 
 		HashSet<Literal> litset2 = new HashSet<Literal>();
-		Literal l4 = new Literal('A', false);
-		Literal l5 = new Literal('B', true);
+		Literal l4 = new Literal('B', false);
+		Literal l5 = new Literal('C', true);
 		litset2.add(l4);
 		litset2.add(l5);
 
 		HashSet<Literal> litset3 = new HashSet<Literal>();
-		Literal l6 = new Literal('A', true);
-		Literal l7 = new Literal('B', false);
+		Literal l6 = new Literal('C', false);
+		Literal l7 = new Literal('D', true);
 		litset3.add(l6);
 		litset3.add(l7);
-
-		HashSet<Literal> litset4 = new HashSet<Literal>();
-		Literal l9 = new Literal('A', false);
-		Literal l10 = new Literal('B', false);
-		litset4.add(l9);
-		litset4.add(l10);
-
+		
 		Klausel klausel1 = new Klausel(litset1);
 		Klausel klausel2 = new Klausel(litset2);
 		Klausel klausel3 = new Klausel(litset3);
-		// Klausel klausel4 = new Klausel(litset4);
 
 		knf = new TreeSet<Klausel>();
-
 		knf.add(klausel1);
 		knf.add(klausel2);
 		knf.add(klausel3);
-		// knf.add(klausel4);
-
-		System.out.println(knf);
+		
+		System.out.println(ausgabe(knf));
 
 		System.out.println(ausgabe(pResolvieren(knf)));
-		System.out.println(knf);
+		System.out.println(zaehler1);
 
 	}
 

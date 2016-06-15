@@ -57,7 +57,7 @@ public class TestNormalResolvieren {
 	@Test
 	public void testKNF2() {
 		
-		/**(!A,!B,!C),(A,!D),(B,!C),(C,!F),(F) = !D*/
+		/**(!A,!B,!C),(A,!D),(B,!C),(C,!F),(F) */
 		
     	HashSet<Literal> litset1 = new HashSet<Literal>();
 		Literal l1 = new Literal('A', false);
@@ -114,105 +114,7 @@ public class TestNormalResolvieren {
 		assertEquals("erfuellbar",(EinfacheResolution.ergebnis(EinfacheResolution.resolvierenNormal(this.knf))));
 	}
 
-	@Test
-	public void testKNF3() {
-		
-		/**(!A,!B,!C,!D),(B,D,G,E,H),(!C),(B) unerfuellbar*/
-		
-		HashSet<Literal> litset1 = new HashSet<Literal>();
-		Literal l1 = new Literal('A', false);
-		Literal l2 = new Literal('B', false);
-		Literal l3 = new Literal('C', false);
-		Literal l4 = new Literal('D', false);
-		litset1.add(l1);
-		litset1.add(l2);
-		litset1.add(l3);
-		litset1.add(l4);
-		
-		HashSet<Literal> litset2 = new HashSet<Literal>();
-		Literal l5 = new Literal('B', true);
-		Literal l6 = new Literal('D', true);
-		Literal l7 = new Literal('G', true);
-		Literal l8 = new Literal('E', true);
-		Literal l9 = new Literal('H', true);
-		litset2.add(l5);
-		litset2.add(l6);
-		litset2.add(l7);
-		litset2.add(l8);
-		litset2.add(l9);
-		
-		HashSet<Literal> litset3 = new HashSet<Literal>();
-		Literal l10 = new Literal('C', false);
-		litset3.add(l10);
-		
-		HashSet<Literal> litset4 = new HashSet<Literal>();
-		Literal l11 = new Literal('B', true);
-		litset4.add(l11);
-		
-		Klausel klausel1 = new Klausel(litset1);
-		Klausel klausel2 = new Klausel(litset2);
-		Klausel klausel3 = new Klausel(litset3);
-		Klausel klausel4 = new Klausel(litset4);
-		
-		knf = new HashSet<Klausel>();
-		
-		knf.add(klausel1);
-		knf.add(klausel2);
-		knf.add(klausel3);
-		knf.add(klausel4);
-		
-		assertEquals("erfuellbar",(EinfacheResolution.ergebnis(EinfacheResolution.resolvierenNormal(this.knf))));
-	}
 	
-	@Test
-	public void testKNF4() {
-		
-		/**(!A,!B,!C,!D),(B,D,G,E,H),(!C),(B) unerfuellbar*/
-		
-		HashSet<Literal> litset1 = new HashSet<Literal>();
-		Literal l1 = new Literal('A', false);
-		Literal l2 = new Literal('B', false);
-		Literal l3 = new Literal('C', false);
-		Literal l4 = new Literal('D', false);
-		litset1.add(l1);
-		litset1.add(l2);
-		litset1.add(l3);
-		litset1.add(l4);
-		
-		HashSet<Literal> litset2 = new HashSet<Literal>();
-		Literal l5 = new Literal('B', true);
-		Literal l6 = new Literal('D', true);
-		Literal l7 = new Literal('G', true);
-		Literal l8 = new Literal('E', true);
-		Literal l9 = new Literal('H', true);
-		litset2.add(l5);
-		litset2.add(l6);
-		litset2.add(l7);
-		litset2.add(l8);
-		litset2.add(l9);
-		
-		HashSet<Literal> litset3 = new HashSet<Literal>();
-		Literal l10 = new Literal('C', false);
-		litset3.add(l10);
-		
-		HashSet<Literal> litset4 = new HashSet<Literal>();
-		Literal l11 = new Literal('B', true);
-		litset4.add(l11);
-		
-		Klausel klausel1 = new Klausel(litset1);
-		Klausel klausel2 = new Klausel(litset2);
-		Klausel klausel3 = new Klausel(litset3);
-		Klausel klausel4 = new Klausel(litset4);
-		
-		knf = new HashSet<Klausel>();
-		
-		knf.add(klausel1);
-		knf.add(klausel2);
-		knf.add(klausel3);
-		knf.add(klausel4);
-		
-		assertEquals("erfuellbar",(EinfacheResolution.ergebnis(EinfacheResolution.resolvierenNormal(this.knf))));
-	}
 	
 }
 

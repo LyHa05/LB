@@ -8,6 +8,7 @@ public class EinheitsResolution {
 
 	public static TreeSet<Klausel> knf;
 	public static boolean resolviert = false;
+	public static boolean bereitsEnthalten = false;
 	public static int zaehler1 = 0;
 	public static int zaehler2 = 0;
 	
@@ -84,11 +85,9 @@ public class EinheitsResolution {
 					Iterator<Literal> k1LitIter = k1.getLiterale().iterator();
 					while (k1LitIter.hasNext() && (resolviert == false)) {
 						Literal l1 = k1LitIter.next();
-					
-//					for (Literal l1 : k1.getLiterale()) {
+
 						Iterator<Literal> k2LitIter = k2.getLiterale().iterator();
 						while (k2LitIter.hasNext() && (resolviert == false)) {
-//						for (Literal l2 : k2.getLiterale()) {
 							Literal l2 = k2LitIter.next();
 							++zaehler1;
 
@@ -115,6 +114,10 @@ public class EinheitsResolution {
 //								System.out.println("zuResolvierendeKlauseln: " +  zuResolvierendeKlauseln);
 //								System.out.println("verfuegbareKlauseln: " + verfuegbareKlauseln);
 								
+								if (verfuegbareKlauseln.contains(neueKlausel)) {
+									bereitsEnthalten = true;
+								}
+								
 								++zaehler2;
 							}
 						}
@@ -122,8 +125,9 @@ public class EinheitsResolution {
 				}
 
 			}
-		} while (resolviert == true && !(zuResolvierendeKlauseln.isEmpty()) && (verfuegbareKlauseln.size() != anzahlVerfKlau));
-
+		} while (resolviert == true && !(zuResolvierendeKlauseln.isEmpty())
+				&& ((verfuegbareKlauseln.size() != anzahlVerfKlau) || bereitsEnthalten == true));
+		
 		return zuResolvierendeKlauseln;
 
 	}
@@ -209,48 +213,41 @@ public class EinheitsResolution {
 
 	public static void main(String[] args) {
 
+		/**{{!A,!B,E},{C},{A},{!C,B},{!A,D}} */
+		
 		HashSet<Literal> litset1 = new HashSet<Literal>();
 		Literal l1 = new Literal('A', false);
 		Literal l2 = new Literal('B', false);
-		Literal l3 = new Literal('C', false);
-		Literal l4 = new Literal('D', true);
+		Literal l3 = new Literal('E', true);
 		litset1.add(l1);
 		litset1.add(l2);
 		litset1.add(l3);
-		litset1.add(l4);
 		
 		HashSet<Literal> litset2 = new HashSet<Literal>();
-		Literal l5 = new Literal('B', true);
-		Literal l6 = new Literal('D', false);
-		Literal l7 = new Literal('G', true);
-		Literal l8 = new Literal('E', true);
-		Literal l9 = new Literal('H', true);
-		litset2.add(l5);
-		litset2.add(l6);
-		litset2.add(l7);
-		litset2.add(l8);
-		litset2.add(l9);
-		
+		Literal l4 = new Literal('C', true);
+		litset2.add(l4);
+
 		HashSet<Literal> litset3 = new HashSet<Literal>();
-		Literal l10 = new Literal('C', false);
-		//Literal l7 = new Literal('B', false);
-		//Literal l8 = new Literal('C', true);
-		litset3.add(l10);
-		//litset3.add(l7);
-		//litset3.add(l8);
+		Literal l5 = new Literal('A', true);
+		litset3.add(l5);
 		
 		HashSet<Literal> litset4 = new HashSet<Literal>();
-		Literal l11 = new Literal('B', true);
-		//Literal l10 = new Literal('B', false);
-		//Literal l8 = new Literal('C', true);
-		litset4.add(l11);
-		//litset4.add(l10);
-		//litset3.add(l8);
+		Literal l6 = new Literal('C', false);
+		Literal l7 = new Literal('B', true);
+		litset4.add(l6);
+		litset4.add(l7);
 		
+		HashSet<Literal> litset5 = new HashSet<Literal>();
+		Literal l8 = new Literal('A', false);
+		Literal l9 = new Literal('D', true);
+		litset5.add(l8);
+		litset5.add(l9);
+				
 		Klausel klausel1 = new Klausel(litset1);
 		Klausel klausel2 = new Klausel(litset2);
 		Klausel klausel3 = new Klausel(litset3);
 		Klausel klausel4 = new Klausel(litset4);
+		Klausel klausel5 = new Klausel(litset5);
 		
 		knf = new TreeSet<Klausel>();
 
@@ -258,11 +255,11 @@ public class EinheitsResolution {
 		knf.add(klausel2);
 		knf.add(klausel3);
 		knf.add(klausel4);
+		knf.add(klausel5);
 
-		System.out.println(knf);
+		System.out.println(ausgabe(knf));
 
-		System.out.println(ausgabe(einheitsResolvieren(knf)));
-		System.out.println(knf);
+		System.out.println(ergebnis(einheitsResolvieren(knf)));
 		System.out.println(zaehler1);
 		System.out.println(zaehler2);
 
