@@ -23,18 +23,23 @@ public class Zaehlerprogramm {
 	private void ausfuehren(Integer aktuelleZeile) {
 		String ausfuehren = programm.get(aktuelleZeile);
 		if (ausfuehren.contains("++")) {
-			doInkrement(Integer.valueOf(ausfuehren.substring(1, 2)));
+			zaehlerliste.forEach(c -> {if(c.getName().equals(ausfuehren.substring(0, 2))){c.inkrement();}});
 			aktuelleProgrammzeile ++;
 		} else if (ausfuehren.contains("--")) {
-			doDekrement(Integer.valueOf(ausfuehren.substring(1, 2)));
+			zaehlerliste.forEach(c -> {if(c.getName().equals(ausfuehren.substring(0, 2))){c.dekrement();}});
 		    aktuelleProgrammzeile ++;
 		} else if (ausfuehren.contains(":")){
 			if(ausfuehren.contains("==")){
-			Integer zaehler = Integer.valueOf(ausfuehren.substring(1, 2));
 			Integer kennziffer = Integer.valueOf(ausfuehren.substring(4, 5));
 			Integer fall1 = Integer.valueOf(ausfuehren.substring(6, 7));
 			Integer fall2 = Integer.valueOf(ausfuehren.substring(8, 9));
-			doSprung((zaehlerliste.get(zaehler-1).getZaehler()) == kennziffer, fall1, fall2);
+			Integer zaehlerwert = null;
+			for (Zaehler zaehler : zaehlerliste) {
+				if (zaehler.getName().equals(ausfuehren.substring(0, 2))) {
+					zaehlerwert = zaehler.getZaehlerwert(); 
+				}
+			} 
+			doSprung((zaehlerwert == kennziffer), fall1, fall2);
 		}
 		}
 	}
@@ -48,14 +53,6 @@ public class Zaehlerprogramm {
 		zaehlerliste.forEach(c -> System.out.println(c.toString()));
 	}
 
-	private void doInkrement(Integer zaehler) {
-		zaehlerliste.get(zaehler-1).inkrement();
-	}
-
-	private void doDekrement(Integer zaehler) {
-		zaehlerliste.get(zaehler-1).dekrement();
-	}
-
 	private void doSprung(boolean bedingung, Integer fall1, Integer fall2) {
 		if(bedingung == true){
 			this.aktuelleProgrammzeile = fall1; 
@@ -65,16 +62,14 @@ public class Zaehlerprogramm {
 	}
 	
 	private void withDebugger(String debugger) throws IOException{
-//		if(debugger == "t"){
-//			Zaehlerprogramm_Debugger.debugRechnung(this);	
-//		}else if(debugger == "m"){
-//			Zaehlerprogramm_Debugger.debugManually(this);
-//		}
+		if(debugger == "t"){
+			Zaehlerprogramm_Debugger.debugRechnung(this);	
+		}else if(debugger == "m"){
+			Zaehlerprogramm_Debugger.debugManually(this);
+		}
 	}
 
 	public String getAktuelleProgrammzeile() {
 		return programm.get(aktuelleProgrammzeile);
 	}
-	
-	
 }

@@ -15,12 +15,12 @@ public class Parser {
 	public Parser(String txt) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(txt));
 		String line = br.readLine();
-		// while Zählerprogramm wird gelesen
+		// while Zï¿½hlerprogramm wird gelesen
 		while (line != null) {
 			programm.add(line);
 			line = br.readLine();
 		}
-		// schließt die Datei wieder
+		// schlieï¿½t die Datei wieder
 		br.close();
 	}
 
@@ -39,11 +39,11 @@ public class Parser {
 
 	private void parse_programm(String line) {
 		if (line.contains("++")) {
-			// Zählerdekrement
-			code.add((line.substring((line.indexOf("c")), (line.indexOf("++") - 1)) + "++"));
+			// Zï¿½hlerdekrement
+			code.add((line.substring((line.indexOf("c")), (line.indexOf("++"))) + "++"));
 		} else if (line.contains("--")) {
-			// Zählerinkrement
-			code.add((line.substring((line.indexOf("c")), (line.indexOf("--") - 1)) + "--"));
+			// Zï¿½hlerinkrement
+			code.add((line.substring((line.indexOf("c")), (line.indexOf("--"))) + "--"));
 		} else if (line.contains("if")) {
 			// Sprung
 			String Zaehler = (line.substring((line.indexOf("c")), (line.indexOf("c") + 2)));

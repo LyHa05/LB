@@ -21,8 +21,12 @@ public class Zaehler {
 		return  name;
 	}
 	
-	public int getZaehler() {
+	public int getZaehlerwert() {
 		return zaehler;
+	}
+
+	public Zaehler getZaehler() {
+		return this;
 	}
 
 	@Override
