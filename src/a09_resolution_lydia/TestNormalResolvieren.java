@@ -377,4 +377,7 @@ public class TestNormalResolvieren {
 
 
 
+<<<<<<< HEAD
 >>>>>>> branch 'master' of https://github.com/LyHa05/LB.git
+=======
+>>>>>>> origin/master
